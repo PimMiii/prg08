@@ -1,43 +1,35 @@
 let classifier;
-const featureExtractor = ml5.featureExtractor('MobileNet', modelLoaded)
+const featureExtractor = ml5.featureExtractor('MobileNet', { numLabels: 3 }, modelLoaded)
 
 const video = document.getElementById("webcam");
 const label = document.getElementById("label");
 
-const maskBtn = document.querySelector('#mask');
-const labelOneBtn = document.querySelector("#labelOne");
-const labelTwoBtn = document.querySelector("#labelTwo");
-const labelThreeBtn = document.querySelector("#labelThree");
+const cubeBtn = document.querySelector('#cube');
+const canBtn = document.querySelector("#can");
+const bottleBtn = document.querySelector("#bottle");
 const trainbtn = document.querySelector("#train");
 
-maskBtn.addEventListener("click", () => addMaskImage());
-labelOneBtn.addEventListener("click", () => addBottleImage());
-labelTwoBtn.addEventListener("click", () => addCupsImage());
-labelThreeBtn.addEventListener("click", () => addEmptyImage());
+cubeBtn.addEventListener("click", addCubeImage);
+canBtn.addEventListener("click", addCanImage);
+bottleBtn.addEventListener("click", addBottleImage);
 
-trainbtn.addEventListener("click", () => trainModel());
+trainbtn.addEventListener("click", trainModel);
 
-function addMaskImage() {
-    classifier.addImage(video, 'wearing a mask', () => {
-        console.log("added image to model!")
+function addCubeImage() {
+    classifier.addImage(video, 'cube', () => {
+        console.log("added Cube to model!")
+    })
+}
+
+function addCanImage() {
+    classifier.addImage(video, 'can', () => {
+        console.log("added Can to model!")
     })
 }
 
 function addBottleImage() {
     classifier.addImage(video, 'bottle', () => {
-        console.log("added image to model!")
-    })
-}
-
-function addCupsImage() {
-    classifier.addImage(video, 'cups', () => {
-        console.log("added image to model!")
-    })
-}
-
-function addEmptyImage() {
-    classifier.addImage(video, 'empty', () => {
-        console.log("added image to model!")
+        console.log("added Bottle to model!")
     })
 }
 

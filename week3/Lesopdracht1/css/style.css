@@ -3,10 +3,10 @@ body {
 }
 
 #label {
-    width: 533px;
+    width: 600px;
     height: 20px;
     color: white;
-    background-color: black;
+    background-color:rgba(0,0,0,0.7);
 }
 
 button {
