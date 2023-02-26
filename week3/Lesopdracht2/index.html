@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,14 +10,29 @@
     <link rel="stylesheet" href="./css/style.css">
     <title>Code voorbeeld ML5</title>
 </head>
+
 <body>
-    <h2>Code voorbeeld met webcam</h2>
+    <h2>Deposit Hunter Model Trainer</h2>
+    <img src ="" id="trainImage" width="533"height="300" hidden>
     <video autoplay playsinline muted id="webcam" width="533" height="300"></video><br />
     <div id="label"></div>
-    <br />
-    <button id="cube">Cube</button>
-    <button id="can">Can</button>
-    <button id="bottle">Bottle</button>
-    <button id="train">TRAIN</button>
+    
+    <div id="labelBtns">
+        <button id="beer">Beer</button>
+        <button id="can">Can</button>
+        <button id="sbottle">Bottle</button>
+    </div>
+    
+
+    <div id="loadBtns">
+        <!--<button id="loadIMG">Load static images from folder</button>-->
+        <!--<button id="userIMG" disabled>Upload image</button>-->
+    </div>
+
+    <div id="actionBtns">
+        <button id="train">TRAIN</button>
+        <button id="save" disabled>Save Model</button>
+    </div>
 </body>
+
 </html>

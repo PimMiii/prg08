@@ -1,43 +1,56 @@
 let classifier;
 const featureExtractor = ml5.featureExtractor('MobileNet', { numLabels: 3 }, modelLoaded)
 
+const trainImg = document.getElementById("trainImage");
 const video = document.getElementById("webcam");
 const label = document.getElementById("label");
 
-const cubeBtn = document.querySelector('#cube');
+const beerBtn = document.querySelector('#beer');
 const canBtn = document.querySelector("#can");
-const bottleBtn = document.querySelector("#bottle");
-const trainbtn = document.querySelector("#train");
+const smallBottleBtn = document.querySelector("#sbottle");
 
-cubeBtn.addEventListener("click", addCubeImage);
+const loadImagesBtn = document.querySelector("#loadIMG");
+const trainbtn = document.querySelector("#train");
+const saveBtn = document.querySelector("#save");
+
+beerBtn.addEventListener("click", addBeerImage);
 canBtn.addEventListener("click", addCanImage);
-bottleBtn.addEventListener("click", addBottleImage);
+smallBottleBtn.addEventListener("click", addSmallBottleImage);
 
 trainbtn.addEventListener("click", trainModel);
+saveBtn.addEventListener("click", saveModel);
 
-function addCubeImage() {
-    classifier.addImage(video, 'cube', () => {
-        console.log("added Cube to model!")
+
+function addBeerImage() {
+    classifier.addImage(video, 'beer bottle', () => {
+        let text = "added beer bottle to model!";
+        console.log(text);
+        label.innerHTML = text;
     })
 }
 
 function addCanImage() {
-    classifier.addImage(video, 'can', () => {
-        console.log("added Can to model!")
+    classifier.addImage(video, 'aluminium can', () => {
+        let text = "added aluminium can to model!";
+        console.log(text);
+        label.innerHTML = text;
     })
 }
 
-function addBottleImage() {
-    classifier.addImage(video, 'bottle', () => {
-        console.log("added Bottle to model!")
+function addSmallBottleImage() {
+    classifier.addImage(video, 'plastic bottle ', () => {
+        let text = "added plastic bottle to model!";
+        console.log(text);
+        label.innerHTML = text;
     })
 }
+
 
 function trainModel() {
     classifier.train((lossValue) => {
         console.log('Loss is', lossValue)
         if (lossValue == null) {
-
+            saveBtn.disabled = false;
             setInterval(() => {
                 classifier.classify(video, (err, result) => {
                     if (err) console.log(err)
@@ -47,6 +60,13 @@ function trainModel() {
             }, 1000)
         }
     })
+}
+
+function saveModel() {
+    if(saveBtn.disabled){
+        return
+    }
+    featureExtractor.save()
 }
 
 function modelLoaded() {

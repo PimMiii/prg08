@@ -2,11 +2,34 @@ body {
     font-family: sans-serif;
 }
 
+div {
+    box-sizing: border-box;
+    margin-block: 2px;
+}
+
 #label {
     width: 533px;
     height: 20px;
     color: white;
-    background-color: black;
+    background-color: rgba(0,0,0,0.7);
+}
+
+#labelBtns {
+    width: 533px;
+    background-color: rgba(0,200,20,0.7);
+
+}
+
+#loadBtns {
+    width: 533px;
+    background-color: rgba(200, 197, 0, 0.7);
+
+}
+
+#actionBtns {
+    width: 533px;
+    background-color: rgba(200, 47, 0, 0.7);
+
 }
 
 button {
