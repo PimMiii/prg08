@@ -1,9 +1,24 @@
 let model
 let videoWidth, videoHeight
 let ctx, canvas
-const log = document.querySelector("#array")
+//const log = document.querySelector("#array")
 const VIDEO_WIDTH = 720
 const VIDEO_HEIGHT = 405
+
+const trainButtons = document.getElementById("trainButtons");
+const label1Btn = document.getElementById("label1");
+const label2Btn = document.getElementById("label1");
+const label3Btn = document.getElementById("label1");
+const label4Btn = document.getElementById("label1");
+const stopTrainingBtn = document.getElementById("stopTraining");
+
+const game = document.getElementById("game");
+const question = document.getElementById("question");
+const answer1 = document.getElementById("a1");
+const answer2 = document.getElementById("a2");
+const answer3 = document.getElementById("a3");
+const answer4 = document.getElementById("a4");
+const guessBtn = document.getElementById("guess");
 
 // video fallback
 navigator.getUserMedia = navigator.getUserMedia ||navigator.webkitGetUserMedia || navigator.mozGetUserMedia
@@ -75,8 +90,8 @@ async function startLandmarkDetection(video) {
     video.height = videoHeight
 
     ctx.clearRect(0, 0, videoWidth, videoHeight)
-    ctx.strokeStyle = "red"
-    ctx.fillStyle = "red"
+    ctx.strokeStyle = "gold"
+    ctx.fillStyle = "gold"
 
     ctx.translate(canvas.width, 0)
     ctx.scale(-1, 1) // video omdraaien omdat webcam in spiegelbeeld is
@@ -108,11 +123,11 @@ async function predictLandmarks() {
 //
 function logData(predictions) {
     let str = ""
-    // console.log(predictions[0].landmarks)
+     console.log(predictions[0].landmarks)
     for (let i = 0; i < 20; i++) {
         str += predictions[0].landmarks[i][0] + ", " + predictions[0].landmarks[i][1] + ", " + predictions[0].landmarks[i][2] + ", "
     }
-    log.innerText = str
+    //log.innerText = str
 }
 
 //
