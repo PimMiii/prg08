@@ -71,6 +71,7 @@ async function setupCamera() {
     })
 }
 
+
 //
 // predict de vinger posities in de video stream
 //
@@ -123,7 +124,7 @@ async function predictLandmarks() {
 //
 function logData(predictions) {
     let str = ""
-     console.log(predictions[0].landmarks)
+     console.log(predictions[0])
     for (let i = 0; i < 20; i++) {
         str += predictions[0].landmarks[i][0] + ", " + predictions[0].landmarks[i][1] + ", " + predictions[0].landmarks[i][2] + ", "
     }
@@ -174,6 +175,30 @@ function drawPath(ctx, points, closePath) {
     }
     ctx.stroke(region)
 }
+
+function capturePose(label) {
+    return null
+}
+
+function startGame() {
+    return null
+}
+
+function predictAnswer() {
+    
+}
+
+//
+// eventlisteners
+//
+label1Btn.addEventListener("click", capturePose("1"));
+label2Btn.addEventListener("click", capturePose("2"));
+label3Btn.addEventListener("click", capturePose("3"));
+label4Btn.addEventListener("click", capturePose("4"));
+
+stopTrainingBtn.addEventListener("click", startGame);
+guessBtn.addEventListener("click", predictAnswer);
+
 
 //
 // start
