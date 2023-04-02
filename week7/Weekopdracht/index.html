@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
     <script defer src="app.js" type="module"></script>
     <title>Decision Tree Inleveropdracht</title>
 </head>
@@ -17,77 +18,40 @@
         <h3>Phone Price Predictor</h3> <a href="./train.html"> Go To Model Trainer</a>
     </div>
     <div id="formDiv">
-        <form id="phoneForm" name="phoneForm" action="#">
-            <label for="cap-color">Color of Cap</label>
-            <select name="cap-color" id="cap-color">
-                <option value="n">Brown</option>
-                <option value="b">Buff</option>
-                <option value="c">Cinnamon</option>
-                <option value="g">Gray</option>
-                <option value="r">Green</option>
-                <option value="p">Pink</option>
-                <option value="u">Purple</option>
-                <option value="e">Red</option>
-                <option value="w">White</option>
-                <option value="y">Yellow</option>
-            </select>
-
-            <label for="habitat">Grows on/in</label>
-            <select name="habitat" id="habitat">
-                <option value="g">Grasses</option>
-                <option value="l">Leaves</option>
-                <option value="m">Meadows</option>
-                <option value="p">Paths</option>
-                <option value="u">Urban</option>
-                <option value="w">Waste</option>
-                <option value="d">Woods</option>
-            </select>
-
-            <label for="odor">Smells like</label>
-            <select name="odor" id="odor">
-                <option value="a">Almond</option>
-                <option value="l">Anise</option>
-                <option value="c">Creosote</option>
-                <option value="y">Fishy</option>
-                <option value="f">Foul</option>
-                <option value="m">Musty</option>
-                <option value="p">Pungent</option>
-                <option value="s">Spicy</option>
-                <option value="n">No Smell</option>
-            </select>
-
-            <label for="ring-type">Type of ring (on stalk)</label>
-            <select name="ring-type" id="ring-type">
-                <option value="c">Cobwebby</option>
-                <option value="e">Evanescent</option>
-                <option value="f">Flaring</option>
-                <option value="l">Large</option>
-                <option value="p">Pendant</option>
-                <option value="s">Sheathing</option>
-                <option value="z">Zone</option>
-                <option value="n">No Ring</option>
-            </select>
-
-            <label for="spore-print-color">Color of Spore Print</label>
-            <select name="spore-print-color" id="spore-print-color">
-                <option value="k">Black</option>
-                <option value="n">Brown</option>
-                <option value="b">Buff</option>
-                <option value="h">Chocolate</option>
-                <option value="r">Green</option>
-                <option value="o">Orange</option>
-                <option value="u">Purple</option>
-                <option value="w">White</option>
-                <option value="y">Yellow</option>
-            </select>
+        <h2 id="loading">Loading Model, please wait...</h2>
+        <form id="phoneForm" name="phoneForm" action="#" hidden>
+            <label for="battery">Battery (100 - 10000)</label>
+            <input type="number" name="battery" id="battery" value="2610" step="10" min="100" max="10000">
+            <br/>
+            <label for="cores">CPU Cores (2 - 32)</label>
+            <input type="number" name="cores" id="cores" value="8" step="2" min="2" max="32">
+            <br/>
+            <label for="cpu">CPU (1 - 6)</label>
+            <input type="number" name="cpu" id="cpu" value="1.35" step="0.025" min="1" max="6">
+            <br/>
+            <label for="memory">RAM (1 - 126)</label>
+            <input type="number" name="memory" id="memory" value="16" step="1" min="1" max="128">
+            <br/>
+            <label for="ppi">Pixels Per Inch (PPI) (100 - 1500)</label>
+            <input type="number" name="ppi" id="ppi" value="424" step="1" min="100" max="1500">
+            <br/>
+            <label for="rearcam">Rearcamera (1 - 128)</label>
+            <input type="number" name="rearcam" id="rearcam" value="13" step="0.05" min="1" max="128">
+            <br/>
+            <label for="storage">storage (1 - 2048)</label>
+            <input type="number" name="storage" id="storage" value="3" step="0.5" min="1" max="2048">
+            <br/>
+            <label for="thickness">Thickness (1 - 32)</label>
+            <input type="number" name="thickness" id="thickness" value="7.4" step="0.1" min="1" max="32">
+            <br/>
             <input type="submit" name="submit" value="Make Prediction">
         </form>
 
 
     </div>
     <div>
-        <h4 id="phone">Mushroom: - </h4>
-        <h3 id="prediction">Prediction: - </h3>
+        <h4 id="phone">Phone: - </h4>
+        <h3 id="prediction">Price: - </h3>
     </div>
 </body>
 
